@@ -14,7 +14,7 @@ import GoalInput from "./components/GoalInput";
 export default function App() {
   const [enteredGoalS, setEnteredGoalS] = useState<any>([]);
 
-  const addGoalHandler = (goalTitle:string) => {
+  const addGoalHandler = (goalTitle: string) => {
     setEnteredGoalS((currentGoals: any) => [
       ...currentGoals,
       { key: Math.random().toString(), value: goalTitle },
@@ -25,11 +25,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <StatusBar style="auto" /> */}
-      <GoalInput onAddGoal={addGoalHandler}/>
+      <GoalInput onAddGoal={addGoalHandler} />
       <FlatList
         data={enteredGoalS}
         keyExtractor={(item, index) => item.key}
-        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <GoalItem
+            onDelete={() => console.log("teste")}
+            title={itemData.item.value}
+          />
+        )}
       />
     </View>
   );
