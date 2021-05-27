@@ -19,7 +19,12 @@ export default function App() {
       ...currentGoals,
       { key: Math.random().toString(), value: goalTitle },
     ]);
-    console.log(enteredGoalS);
+  };
+
+  const removeGoalHandler = (goalKey: String) => {
+    setEnteredGoalS((currentGoals: any) => {
+      return currentGoals.filter((goal: any) => goal.key !== goalKey);
+    });
   };
 
   return (
@@ -31,7 +36,8 @@ export default function App() {
         keyExtractor={(item, index) => item.key}
         renderItem={(itemData) => (
           <GoalItem
-            onDelete={() => console.log("teste")}
+            id={itemData.item.key}
+            onDelete={removeGoalHandler}
             title={itemData.item.value}
           />
         )}
