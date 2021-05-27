@@ -9,18 +9,15 @@ import {
   FlatList,
 } from "react-native";
 import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState("");
   const [enteredGoalS, setEnteredGoalS] = useState<any>([]);
 
-  const goalInputHandler = (enteredText: string) => {
-    setEnteredGoal(enteredText);
-  };
-  const addGoalHandler = () => {
+  const addGoalHandler = (goalTitle:string) => {
     setEnteredGoalS((currentGoals: any) => [
       ...currentGoals,
-      { key: Math.random().toString(), value: enteredGoal },
+      { key: Math.random().toString(), value: goalTitle },
     ]);
     console.log(enteredGoalS);
   };
@@ -28,7 +25,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <StatusBar style="auto" /> */}
-
+      <GoalInput onAddGoal={addGoalHandler}/>
       <FlatList
         data={enteredGoalS}
         keyExtractor={(item, index) => item.key}
