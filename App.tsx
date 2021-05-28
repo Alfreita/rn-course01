@@ -13,8 +13,12 @@ export default function App() {
       ...currentGoals,
       { key: Math.random().toString(), value: goalTitle },
     ]);
+    setIsModal(false);
   };
 
+  const cancelGoalAddHandler = () => {
+    setIsModal(false);
+  };
   const removeGoalHandler = (goalKey: String) => {
     setEnteredGoalS((currentGoals: any) => {
       return currentGoals.filter((goal: any) => goal.key !== goalKey);
@@ -25,7 +29,7 @@ export default function App() {
     <View style={styles.container}>
       <Button title="Add New Goal" onPress={() => setIsModal(true)} />
       {/* <StatusBar style="auto" /> */}
-      <GoalInput onAddGoal={addGoalHandler} visible={ismodal} setVisible={setIsModal}/>
+      <GoalInput onAddGoal={addGoalHandler} visible={ismodal} cancelModal={cancelGoalAddHandler}/>
       <FlatList
         data={enteredGoalS}
         keyExtractor={(item, index) => item.key}
